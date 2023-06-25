@@ -9,6 +9,7 @@ import { CategoryResponse, Datum } from '../interface/CategoryResponse.interface
   templateUrl: './home-category.component.html',
   styleUrls: ['./home-category.component.css']
 })
+
 export class HomeCategoryComponent implements OnInit{
   displayedColumns: string[] = ['id', 'name', 'description', 'actions']
   dataSource = new MatTableDataSource<any>([])
@@ -33,5 +34,4 @@ export class HomeCategoryComponent implements OnInit{
   constructor(
     private _categoryService: CategoryService
   ){}
-
 }

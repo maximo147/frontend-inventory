@@ -9,7 +9,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table'
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
 
 @NgModule({
   declarations: [],
@@ -25,6 +25,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatPaginatorModule,
     MatSidenavModule,
     MatTableModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
     MatToolbarModule
   ]
 })

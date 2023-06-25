@@ -5,6 +5,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { HomeCategoryComponent } from './home-category/home-category.component';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MaterialModule,
     CategoryRoutingModule,
+    CategoryRoutingModule
   ]
 })
 export class CategoryModule { }

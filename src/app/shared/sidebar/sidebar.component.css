@@ -1,0 +1,17 @@
+
+mat-sidenav-container {
+    min-height: 100%;
+}
+
+mat-sidenav {
+    width: 200px;
+}
+
+mat-list-item:hover {
+    cursor: pointer;
+    background-color: rgba(88, 88, 88, 0.315);
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
