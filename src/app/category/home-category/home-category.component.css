@@ -1,0 +1,35 @@
+
+.p-left {
+    text-align: left;    
+}
+
+.p-center {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.p-right {
+    text-align: right;
+}
+
+
+mat-form-field {
+    width: 350px;
+}
+
+mat-icon {
+    padding: 5px;
+    margin-right: 40px;
+    background-color: #fff;
+}
+
+mat-icon:hover {
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: rgb(133, 65, 201);
+}
+
+.inputSearch {
+    width: 2500px;
+}
