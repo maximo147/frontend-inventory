@@ -41,7 +41,9 @@
                         mat-icon-button>
                         <mat-icon>edit_note</mat-icon>
                     </button>
-                    <button mat-icon-button>
+                    <button 
+                        (click)="openDelete(element.id)"
+                        mat-icon-button>
                         <mat-icon>delete</mat-icon>
                     </button>
                     

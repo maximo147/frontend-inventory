@@ -40,7 +40,6 @@ export class FormCategoryComponent implements OnInit {
       )     
     }
     if(this.data.id > 0){
-      console.log("Actualizando")
       const categoryUpdate: CategoryRequestUpdate = {
         id: this.data.id,
         name: this.formCategory.controls['name'].value,

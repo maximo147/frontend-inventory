@@ -6,6 +6,7 @@ import { CategoryResponse, Datum } from '../../interface/CategoryResponse.interf
 import { MatDialog } from '@angular/material/dialog';
 import { FormCategoryComponent } from '../../component/form-category/form-category.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteCategoryComponent } from '../../component/delete-category/delete-category.component';
 
 @Component({
   selector: 'app-home-category',
@@ -42,17 +43,21 @@ export class HomeCategoryComponent implements OnInit{
 
   public openForm(id: number): void {
     const dialogForm = this._dialog.open(FormCategoryComponent, {
-      data: {
-        id
-      }
+      data: { id }
     })
     dialogForm.afterClosed().subscribe(value => {
-      if(value === 1) {
-        this.ngOnInit()
-      }
+      if(value === 1) this.ngOnInit()
     })      
   }
 
+  public openDelete(id: number): void {
+    const dialogDelete = this._dialog.open(DeleteCategoryComponent, {
+      data: { id }
+    })
+    dialogDelete.afterClosed().subscribe(value => {
+      if(value === 1) this.ngOnInit()
+    })
+  }
 
 
   constructor(

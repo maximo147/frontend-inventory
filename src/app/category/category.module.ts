@@ -6,13 +6,15 @@ import { HomeCategoryComponent } from './pages/home-category/home-category.compo
 import { MaterialModule } from '../material/material.module';
 import { FormCategoryComponent } from './component/form-category/form-category.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteCategoryComponent } from './component/delete-category/delete-category.component';
 
 
 
 @NgModule({
   declarations: [
     HomeCategoryComponent,
-    FormCategoryComponent
+    FormCategoryComponent,
+    DeleteCategoryComponent
   ],
   imports: [
     CommonModule,

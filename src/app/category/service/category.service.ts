@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryResponse } from '../interface/CategoryResponse.interface';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
 import { CategoryRequestSave, CategoryRequestUpdate } from '../interface/CategoryRequest.interface';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +11,23 @@ import { CategoryRequestSave, CategoryRequestUpdate } from '../interface/Categor
 export class CategoryService {
 
   public getAll(): Observable<CategoryResponse> {
-      return this._http.get<CategoryResponse>("http://localhost:8080/api/v1/category")
+      return this._http.get<CategoryResponse>(`${environment.url}/category`)
   }
 
   public getById(id: number): Observable<CategoryResponse> {
-    return this._http.get<CategoryResponse>(`http://localhost:8080/api/v1/category/${id}`)
+    return this._http.get<CategoryResponse>(`${environment.url}/category/${id}`)
   }
 
   public save(object: CategoryRequestSave): Observable<CategoryResponse> {
-    return this._http.post<CategoryResponse>(`http://localhost:8080/api/v1/category`, object)
+    return this._http.post<CategoryResponse>(`${environment.url}/category`, object)
   }
 
   public update(id: number, object: CategoryRequestUpdate): Observable<CategoryResponse> {
-    return this._http.put<CategoryResponse>(`http://localhost:8080/api/v1/category/${id}`, object)
+    return this._http.put<CategoryResponse>(`${environment.url}/category/${id}`, object)
+  }
+
+  public delete(id: number): Observable<CategoryResponse> {
+    return this._http.delete<CategoryResponse>(`${environment.url}/category/${id}`)
   }
 
 
