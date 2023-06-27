@@ -14,7 +14,7 @@
         <button 
             mat-raised-button 
             color="primary" 
-            (click)="openForm()"
+            (click)="openForm(0)"
             matInput>
             Agregar categoría
         </button>
@@ -37,7 +37,7 @@
                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let element">
                     <button
-                         
+                        (click)="openForm(element.id)"
                         mat-icon-button>
                         <mat-icon>edit_note</mat-icon>
                     </button>

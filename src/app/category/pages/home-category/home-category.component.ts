@@ -5,7 +5,6 @@ import { CategoryService } from '../../service/category.service';
 import { CategoryResponse, Datum } from '../../interface/CategoryResponse.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { FormCategoryComponent } from '../../component/form-category/form-category.component';
-import { CategoryResponse400 } from '../../interface/CategoryResponseError.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -41,13 +40,17 @@ export class HomeCategoryComponent implements OnInit{
     })
   }
 
-  public openForm(): void {
-    const dialogForm = this._dialog.open(FormCategoryComponent)
+  public openForm(id: number): void {
+    const dialogForm = this._dialog.open(FormCategoryComponent, {
+      data: {
+        id
+      }
+    })
     dialogForm.afterClosed().subscribe(value => {
       if(value === 1) {
         this.ngOnInit()
       }
-    })
+    })      
   }
 
 

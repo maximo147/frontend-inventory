@@ -5,6 +5,7 @@ import { CategoryService } from '../../service/category.service';
 import { CategoryResponse } from '../../interface/CategoryResponse.interface';
 import { CategoryResponse400 } from '../../interface/CategoryResponseError.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CategoryRequestUpdate } from '../../interface/CategoryRequest.interface';
 
 @Component({
   selector: 'app-form-category',
@@ -19,23 +20,47 @@ export class FormCategoryComponent implements OnInit {
       name: [{value: '', disabled: false}, [Validators.required, Validators.minLength(3)]],
       description: [{value: '', disabled: false}, [Validators.required, Validators.minLength(3)]]
     })
+
+    if(this.data.id > 0) {
+      this._categoryService.getById(this.data.id)
+      .subscribe(resp => {
+        this.formCategory.controls['name'].setValue(resp.data[0].name)
+        this.formCategory.controls['description'].setValue(resp.data[0].description)
+      })
+    }
+
   }
 
   public guardar(): void {
-    this._categoryService.save(this.formCategory.value)
-    .subscribe(
-      (resp: CategoryResponse) => this.verificar(resp),
-      (error: CategoryResponse400) => {
-        console.log("Error", error)
-        this.messageSnack(error.error.message)
-        
+    if(this.data.id === 0){
+      this._categoryService.save(this.formCategory.value)
+      .subscribe(
+        (resp: CategoryResponse) => this.verificar(resp),
+        (error: CategoryResponse400) => this.messageSnack(error.error.message)
+      )     
+    }
+    if(this.data.id > 0){
+      console.log("Actualizando")
+      const categoryUpdate: CategoryRequestUpdate = {
+        id: this.data.id,
+        name: this.formCategory.controls['name'].value,
+        description: this.formCategory.controls['description'].value
       }
-    )
+      this._categoryService.update(this.data.id, categoryUpdate)
+      .subscribe(
+        (resp: CategoryResponse) => this.verificar(resp),
+        (error: CategoryResponse400) => this.messageSnack(error.error.message)
+      )     
+    }
   }
 
   public verificar(resp: CategoryResponse): void {
     if(resp.metadata[0].code == '201') {
       this.messageSnack("Guardado correctamente")
+      this.dialogRef.close(1)
+    }
+    if(resp.metadata[0].code == '200') {
+      this.messageSnack("Actualizado correctamente")
       this.dialogRef.close(1)
     }
     if(resp.metadata[0].code[0] == '4') {

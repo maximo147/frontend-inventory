@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { CategoryResponse } from '../interface/CategoryResponse.interface';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { CategoryRequestSave } from '../interface/CategoryRequest.interface';
+import { CategoryRequestSave, CategoryRequestUpdate } from '../interface/CategoryRequest.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,10 @@ export class CategoryService {
 
   public save(object: CategoryRequestSave): Observable<CategoryResponse> {
     return this._http.post<CategoryResponse>(`http://localhost:8080/api/v1/category`, object)
+  }
+
+  public update(id: number, object: CategoryRequestUpdate): Observable<CategoryResponse> {
+    return this._http.put<CategoryResponse>(`http://localhost:8080/api/v1/category/${id}`, object)
   }
 
 

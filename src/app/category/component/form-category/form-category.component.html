@@ -1,5 +1,5 @@
 
-<h1 mat-dialog-title>Crear Categoría</h1>
+<h1 mat-dialog-title>{{data.id > 0 ? 'Actualizar' : 'Crear'}} Categoría</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="formCategory"> 
@@ -29,7 +29,7 @@
                 mat-raised-button 
                 [disabled]="formCategory.invalid"
                 color="primary">
-                    Guardar
+                {{data.id > 0 ? 'Actualizar' : 'Guardar'}}
             </button>
         </div>
     </form>
