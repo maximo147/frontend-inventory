@@ -13,13 +13,18 @@
     text-align: right;
 }
 
+.ng-container {
+    margin-left: 40px;
+    margin-right: 40px;
+}
 
 mat-form-field {
     width: 350px;
 }
 
 mat-icon {
-    padding: 5px;
+
+    margin-right: 40px;
     margin-right: 40px;
     background-color: #fff;
 }
