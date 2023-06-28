@@ -30,6 +30,13 @@ export class CategoryService {
     return this._http.delete<CategoryResponse>(`${environment.url}/category/${id}`)
   }
 
+  /**
+   * @param _http 
+   */
+  public getByIdOrName(id: number, name: string): Observable<CategoryResponse> {
+    return this._http.get<CategoryResponse>(`${environment.url}/category/${id}/${name}`)
+  }
+
 
   constructor(
     private _http: HttpClient

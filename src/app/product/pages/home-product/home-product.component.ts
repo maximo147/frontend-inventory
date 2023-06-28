@@ -1,34 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CategoryService } from '../../service/category.service';
-import { CategoryResponse, Datum } from '../../interface/CategoryResponse.interface';
+import { ProductResponse } from '../../interface/ProductResponse.interface';
+import { ProductService } from '../../service/product.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FormCategoryComponent } from '../../component/form-category/form-category.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DeleteCategoryComponent } from '../../component/delete-category/delete-category.component';
+import { DeleteProductComponent } from '../../component/delete-product/delete-product.component';
+import { FormProductComponent } from '../../component/form-product/form-product.component';
 
 @Component({
-  selector: 'app-home-category',
-  templateUrl: './home-category.component.html',
-  styleUrls: ['./home-category.component.css']
+  selector: 'app-home-product',
+  templateUrl: './home-product.component.html',
+  styleUrls: ['./home-product.component.css']
 })
-
-export class HomeCategoryComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'name', 'description', 'actions']
+export class HomeProductComponent {
+  displayedColumns: string[] = ['id', 'name', 'price', 'quantity', 'picture', 'category', 'actions']
   dataSource = new MatTableDataSource<any>([])
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  categories !: Datum[];
-
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
 
   ngOnInit(): void {
-    this._categoryService.getAll().subscribe(
-      (resp: CategoryResponse) => this.dataSource.data = resp.data,
+    this._productService.getAll().subscribe(
+      (resp: ProductResponse) => this.dataSource.data = resp.data,
       (error: any) => this.messageSnack("Hubo un error al obtener categorías")
     )
   }
@@ -39,15 +35,15 @@ export class HomeCategoryComponent implements OnInit{
       this.ngOnInit()
     }else{
       if(!isNaN(value)) {
-        this._categoryService.getByIdOrName(value, value)
+        this._productService.getByIdOrName(value, value)
         .subscribe(
-          (resp: CategoryResponse) => this.dataSource.data = resp.data,
+          (resp: ProductResponse) => this.dataSource.data = resp.data,
           (error: any) => this.messageSnack("No se encontró categorías")
         )   
       } else {
-        this._categoryService.getByIdOrName(0, value)
+        this._productService.getByIdOrName(0, value)
         .subscribe(
-          (resp: CategoryResponse) => this.dataSource.data = resp.data,
+          (resp: ProductResponse) => this.dataSource.data = resp.data,
           (error: any) => this.messageSnack("No se encontró categorías")
         )  
       }
@@ -67,7 +63,7 @@ export class HomeCategoryComponent implements OnInit{
   }
 
   public openForm(id: number): void {
-    const dialogForm = this._dialog.open(FormCategoryComponent, {
+    const dialogForm = this._dialog.open(FormProductComponent, {
       data: { id }
     })
     dialogForm.afterClosed().subscribe(value => {
@@ -76,7 +72,7 @@ export class HomeCategoryComponent implements OnInit{
   }
 
   public openDelete(id: number): void {
-    const dialogDelete = this._dialog.open(DeleteCategoryComponent, {
+    const dialogDelete = this._dialog.open(DeleteProductComponent, {
       data: { id }
     })
     dialogDelete.afterClosed().subscribe(value => {
@@ -85,8 +81,13 @@ export class HomeCategoryComponent implements OnInit{
   }
 
 
+  public visualizarImg(valor64: string): string {
+    return 'data:image/jpg;base64, ' + valor64
+  }
+
+
   constructor(
-    private _categoryService: CategoryService,
+    private _productService: ProductService,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar
   ){}

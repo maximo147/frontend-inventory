@@ -1,0 +1,24 @@
+
+mat-form-field {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container-form {
+    width: 600px;
+}
+
+div > mat-label {
+    display: block;
+    width: 100%;
+}
+
+div > .input-file {
+    
+    background-color: blueviolet;
+    border: none;
+}
