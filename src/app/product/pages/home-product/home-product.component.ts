@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteProductComponent } from '../../component/delete-product/delete-product.component';
 import { FormProductComponent } from '../../component/form-product/form-product.component';
+import { UtilService } from 'src/app/shared/service/util.service';
 
 @Component({
   selector: 'app-home-product',
@@ -17,12 +18,14 @@ export class HomeProductComponent {
   displayedColumns: string[] = ['id', 'name', 'price', 'quantity', 'picture', 'category', 'actions']
   dataSource = new MatTableDataSource<any>([])
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  public isAdmin: boolean = false
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
 
   ngOnInit(): void {
+    this.isAdmin = this._util.isAdmin()
     this._productService.getAll().subscribe(
       (resp: ProductResponse) => this.dataSource.data = resp.data,
       (error: any) => this.messageSnack("Hubo un error al obtener categorías")
@@ -89,6 +92,7 @@ export class HomeProductComponent {
   constructor(
     private _productService: ProductService,
     private _dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _util: UtilService
   ){}
 }

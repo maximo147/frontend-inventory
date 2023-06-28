@@ -56,11 +56,13 @@
                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let element">
                     <button
+                        [disabled]="!isAdmin"
                         (click)="openForm(element.id)"
                         mat-icon-button>
                         <mat-icon>edit_note</mat-icon>
                     </button>
                     <button 
+                        [disabled]="!isAdmin"
                         (click)="openDelete(element.id)"
                         mat-icon-button>
                         <mat-icon>delete</mat-icon>

@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormCategoryComponent } from '../../component/form-category/form-category.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteCategoryComponent } from '../../component/delete-category/delete-category.component';
+import { UtilService } from 'src/app/shared/service/util.service';
 
 @Component({
   selector: 'app-home-category',
@@ -20,6 +21,7 @@ export class HomeCategoryComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   categories !: Datum[];
+  isAdmin: boolean = false
 
 
   ngAfterViewInit() {
@@ -27,6 +29,9 @@ export class HomeCategoryComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log(this._util.getRoles())
+    console.log(this._util.isAdmin())
+    this.isAdmin = this._util.isAdmin()
     this._categoryService.getAll().subscribe(
       (resp: CategoryResponse) => this.dataSource.data = resp.data,
       (error: any) => this.messageSnack("Hubo un error al obtener categorías")
@@ -88,6 +93,7 @@ export class HomeCategoryComponent implements OnInit{
   constructor(
     private _categoryService: CategoryService,
     private _dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _util: UtilService
   ){}
 }
