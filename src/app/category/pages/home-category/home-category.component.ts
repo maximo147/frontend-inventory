@@ -89,6 +89,21 @@ export class HomeCategoryComponent implements OnInit{
     })
   }
 
+  public exportExcel(){
+    this._categoryService.exportExcel()
+    .subscribe(
+      (resp: any) => {
+        let file = new Blob([resp], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+        let fileUrl = URL.createObjectURL(file)
+        var anchor = document.createElement("a")
+        anchor.download = "categories.xlsx"
+        anchor.href = fileUrl
+        anchor.click()
+      },
+      (error: any) => this.messageSnack("Error al exportar archivo")
+    )
+  }
+
 
   constructor(
     private _categoryService: CategoryService,

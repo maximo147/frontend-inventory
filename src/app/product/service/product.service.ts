@@ -38,6 +38,10 @@ export class ProductService {
     return this._http.get<ProductResponse>(`${environment.url}/product/${id}/${name}`)
   }
 
+  public exportExcel() {
+    return this._http.get(`${environment.url}/product/export/excel`,{ responseType: 'blob' })
+  }
+
 
   constructor(
     private _http: HttpClient

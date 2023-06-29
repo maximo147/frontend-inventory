@@ -37,6 +37,10 @@ export class CategoryService {
     return this._http.get<CategoryResponse>(`${environment.url}/category/${id}/${name}`)
   }
 
+  public exportExcel() {
+    return this._http.get(`${environment.url}/category/export/excel`,{ responseType: 'blob' })
+  }
+
 
   constructor(
     private _http: HttpClient
